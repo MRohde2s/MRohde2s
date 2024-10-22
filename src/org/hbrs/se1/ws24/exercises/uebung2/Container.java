@@ -1,45 +1,56 @@
 package org.hbrs.se1.ws24.exercises.uebung2;
-
+import java.util.ArrayList;
 public class Container {
-    private Member[] memberArray = new Member[100];
+   private ArrayList<Member> members;
 
     public void addMember(Member member) throws ContainerException {
-        for (int i = 0; i < memberArray.length; i++) {
-            int memberID = memberArray[i].getID();
-            if (memberID == member.getID()) {
-                throw new ContainerException("Das Member-Objekt mit der ID" + memberID + " ist bereits vorhanden");
-            }
-        }
+       if (members == null) {
+           ContainerException ex = new ContainerException();
+           throw ex;
+       }
+       if (members.contains(member)) {
+           ContainerException ex = new ContainerException();
+           throw ex;
+       }
+       members.add(member);
     }
 
     public String deleteMember(int id) {
-        for (int i = 0; i < memberArray.length; i++) {
-            if (memberArray[i].getID() == id) {
-                memberArray[i] = null;
-            }
-            else{
-                return "Member nicht vrhanden";
+       Member rec = getMember(id);
+    }
+    public boolean contains(Member member) {
+        int id = member.getID();
+        for (Member rec : members) {
+            if (rec.getID() == id) {
+                return true;
             }
         }
-        return "Member gelöscht";
+        return false;
     }
     public void dump(){
-        for (int i = 0; i < memberArray.length; i++) {
-            System.out.println(memberArray[i].toString());
+        for (int i = 0; i < members.size(); i++) {
+            System.out.println(members.get(i).toString());
         }
     }
     public int size() {
         int size = 0;
-        for (int i = 0; i < memberArray.length; i++) {
-            if (memberArray[i] != null) {
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i) != null) {
                 size++;
             }
         }
         return size;
     }
+    private Member getMember(int id) {
+        for( E rec : member){
+            if (id == (rec).getID().intValue()){
+                return (members) rec;
+            }
+        }
+    }
     @Override
     public String toString() {
-        return "Member (ID=" + memberArray[0].getID() + ")";
+        return "Member (ID=" + members.get(0).getID() + ")";
     }
 }
 

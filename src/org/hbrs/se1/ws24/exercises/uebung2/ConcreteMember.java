@@ -10,4 +10,11 @@ public class ConcreteMember implements Member{
     public Integer getID() {
         return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String toString() {
+        return "ConcreteMember [id=" + id + "]";
+    }
 }
